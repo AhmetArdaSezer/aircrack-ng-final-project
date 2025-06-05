@@ -91,10 +91,13 @@ Sorumluluk reddi
 
 Bu noktada kesinlikle net olmak istiyoruz. Komşunuzun kablosuz ağında, bir web sitesini barındıran bir sunucuda veya diğer ağlarda tarama yapmak yeterince masum görünse de bunu yapmayın . Sistemlerinde herhangi bir tür hackleme veya sızma testi yapacaksanız ağ sahibinden izin almanız gerekir. 
 
-Büyük bir sorun gibi görünmeyebilir, ancak izinsiz bir sistemi hacklemek veya hatta taramak, bulunduğunuz yere bağlı olarak hapis cezası da dahil olmak üzere aşırı yüksek yasal cezalar içerebilir  Adım 1: Ortamınızı Ayarlama iwconfig: Kablosuz arayüzünüzün mevcut durumunu gösterir. Bu komutla arayüzün “monitor” modda olup olmadığını kontrol edebilirsiniz.![a](https://github.com/user-attachments/assets/ab61e711-f28e-47d1-bb2e-7a55b465a7c2)
+Büyük bir sorun gibi görünmeyebilir, ancak izinsiz bir sistemi hacklemek veya hatta taramak, bulunduğunuz yere bağlı olarak hapis cezası da dahil olmak üzere aşırı yüksek yasal cezalar içerebilir  Adım 1: Ortamınızı Ayarlama iwconfig: Kablosuz arayüzünüzün mevcut durumunu gösterir. Bu komutla arayüzün “monitor” modda olup olmadığını kontrol edebilirsiniz.![image](https://github.com/user-attachments/assets/a7dc45ec-8da1-4246-a8b9-2b32e1edcc6f)
+
                                                                                                                                                                                                                                                                      
 iw list: Kablosuz adaptörünüzün teknik özelliklerini listeler. “Monitor mode” desteklenip desteklenmediğini buradan öğrenebilirsiniz.    
-         ![a](https://github.com/user-attachments/assets/ba46051a-25d5-4ef0-803a-d1846cf1221d)
+        ![image](https://github.com/user-attachments/assets/ad11f82f-bc1a-4cc2-a30e-7fbf5cd40884)
+
+
 
 airmon-ng check: Monitor moda geçişi engelleyebilecek çalışan servisleri kontrol eder (örneğin NetworkManager).            
   ![a](https://github.com/user-attachments/assets/e3d689ac-7ba4-476a-a368-686d4867923d)
