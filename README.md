@@ -91,4 +91,94 @@ Sorumluluk reddi
 
 Bu noktada kesinlikle net olmak istiyoruz. Komşunuzun kablosuz ağında, bir web sitesini barındıran bir sunucuda veya diğer ağlarda tarama yapmak yeterince masum görünse de bunu yapmayın . Sistemlerinde herhangi bir tür hackleme veya sızma testi yapacaksanız ağ sahibinden izin almanız gerekir. 
 
-Büyük bir sorun gibi görünmeyebilir, ancak izinsiz bir sistemi hacklemek veya hatta taramak, bulunduğunuz yere bağlı olarak hapis cezası da dahil olmak üzere aşırı yüksek yasal cezalar içerebilir
+Büyük bir sorun gibi görünmeyebilir, ancak izinsiz bir sistemi hacklemek veya hatta taramak, bulunduğunuz yere bağlı olarak hapis cezası da dahil olmak üzere aşırı yüksek yasal cezalar içerebilir  Adım 1: Ortamınızı Ayarlama iwconfig: Kablosuz arayüzünüzün mevcut durumunu gösterir. Bu komutla arayüzün “monitor” modda olup olmadığını kontrol edebilirsiniz.![a](https://github.com/user-attachments/assets/ab61e711-f28e-47d1-bb2e-7a55b465a7c2)
+                                                                                                                                                                                                                                                                     
+iw list: Kablosuz adaptörünüzün teknik özelliklerini listeler. “Monitor mode” desteklenip desteklenmediğini buradan öğrenebilirsiniz.    
+         ![a](https://github.com/user-attachments/assets/ba46051a-25d5-4ef0-803a-d1846cf1221d)
+
+airmon-ng check: Monitor moda geçişi engelleyebilecek çalışan servisleri kontrol eder (örneğin NetworkManager).            
+  ![a](https://github.com/user-attachments/assets/e3d689ac-7ba4-476a-a368-686d4867923d)
+
+airmon-ng check kill: Yukarıdaki engelleyici servisleri durdurur. Bu, monitor modunu güvenle etkinleştirmek için gereklidir.  
+           ![image](https://github.com/user-attachments/assets/182d9723-9181-4fcf-ac68-179e7f123fd9)
+
+Adım 2: Monitor Modunu Etkinleştirme
+Ağ paketlerini yakalayabilmek için, kablosuz adaptörünüzün monitor moduna geçirilmesi gerekir.
+
+  ![image](https://github.com/user-attachments/assets/79ac3506-4594-4d4c-bd48-b11412e88376)
+          
+ iwconfig komutunu tekrar çalıştırarak "Mode: Monitor" yazısını görmelisiniz.    
+            
+   ![a](https://github.com/user-attachments/assets/5e7c99d2-c11a-4f63-87ee-29d83fe96b97)
+                                                                                 
+Adım 3: WiFi Ağlarını Taramak
+
+Bu komut, yakındaki WiFi ağlarını tarar       
+            
+  ![image](https://github.com/user-attachments/assets/60fd4753-629e-414f-ab45-5da3efa9786f)
+             
+ Bu komut, yakındaki Wi-Fi ağlarını tarar ve onların BSSID'sini (MAC adresi), sinyal gücünü, şifreleme türünü (WPA/WPA2) ve bağlı istemcileri görüntüler.          
+            
+![image](https://github.com/user-attachments/assets/abd7fa84-8c63-45d9-8716-0d8859119d24)
+
+            
+            
+
+
+
+
+
+
+Adım 4: Handshake (Şifreleme Paketi) Yakalama
+Hedef Ağa Odaklanmak için:
+
+![image](https://github.com/user-attachments/assets/531ba31e-a1b7-4054-9599-304701a53b99)
+
+
+
+
+-c <kanal> → Hedef ağın kanalını belirtir.
+
+--bssid <hedef-BSSID> → Sadece seçilen ağa ait paketleri filtreler.
+
+-w capture → Verileri capture-01.cap adında bir dosyaya kaydeder.
+
+Bu, istemciyi yeniden bağlanmaya ve yeni bir el sıkışma (handshake) oluşturmaya zorlayan yetkisiz bağlantı kesme (de-authentication) paketleri gönderir.  
+
+ Adım 5: Şifreyi Kırmak 
+
+ El sıkışma (handshake) yakalandıktan sonra, şifreyi kırmayı denemek için Aircrack-ng aracını kullanın.
+
+ ![image](https://github.com/user-attachments/assets/9445dd3c-4012-48e8-82a4-f16ebfe1ff6a)
+
+
+
+![image](https://github.com/user-attachments/assets/1e6ecf23-37c3-4d7d-8b1f-6ee8cb6d8829)
+
+
+
+Bu komut, bir parola listesini kullanarak şifreyi kırmayı dener:
+
+-w rockyou.txt parametresi, saldırı sırasında kullanılacak parola listesini belirtir.
+
+capture-01.cap ise yakalanan handshake verilerini içeren dosyadır.
+Parola zayıfsa ve parola listesinde yer alıyorsa, Aircrack-ng şifreyi başarıyla kıracaktır.
+
+Profesyonel İpucu: Bu yöntem başarısız olursa, daha hızlı brute-force (kaba kuvvet) saldırısı için Hashcat ile GPU hızlandırma kullanmayı deneyin.
+
+Aircrack-ng Saldırılarına Karşı Savunma
+Saldırganların WiFi ağlarını nasıl hedef aldığını anlamak, ağınızı güvence altına almak açısından büyük önem taşır:
+
+WPA3 Şifreleme Kullanın: Güvenliği artırmak için WPA2 yerine WPA3’e geçin.
+
+WPS’i Devre Dışı Bırakın: WiFi Protected Setup (WPS), brute-force saldırıları için bir açık olabilir. Kapatmak ek güvenlik sağlar.
+
+Güçlü ve Rastgele Parolalar Kullanın: Büyük/küçük harf, rakam ve özel karakterler içeren, en az 16 karakter uzunluğunda karmaşık parolalar oluşturun.
+
+MAC Adresi Filtreleme Etkinleştirin: Ağa yalnızca tanımlı cihazların bağlanmasına izin verin.
+
+Ağ Etkinliğini İzleyin: Yetkisiz erişim girişimlerini tespit etmek için logları düzenli olarak kontrol edin.
+
+VPN Kullanın: Özellikle halka açık WiFi ağlarında ek şifreleme için VPN kullanın.
+
+Aircrack-ng ile WiFi saldırı tekniklerini öğrenmek, siber güvenlik uzmanları için önemlidir. Bu sayede açıkları tespit edebilir, ağ savunmasını güçlendirebilir ve kapsamlı güvenlik testleri yapabilirsiniz.
