@@ -3,7 +3,7 @@ Monitor mod ile gizli SSID keşfi ve deauth saldırısı
 
 
 ## Takım Üyeleri
-- Ahmet Arda Sezer
+- Ahmet Arda Sezer 2420191025
 
 
 ## Açıklama
